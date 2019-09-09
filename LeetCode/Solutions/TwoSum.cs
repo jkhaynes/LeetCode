@@ -8,6 +8,11 @@ namespace LeetCode.Solutions
     {
         public static int[] GetTwoNumbersThatAddToTarget(int[] nums, int target)
         {
+            if (nums == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             Dictionary<int, int> dict = new Dictionary<int, int>();
             for (var i = 0; i < nums.Length; i++)
             {
@@ -21,6 +26,7 @@ namespace LeetCode.Solutions
                     dict.Add(nums[i], i);
                 }
             }
+
             return null;
         }
     }
