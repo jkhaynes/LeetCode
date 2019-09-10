@@ -15,38 +15,54 @@ namespace LeetCode.Solutions
             }
 
             ListNode curNode = null;
-            var sum = l1.val + l2.val;
-            var resultNode = curNode = new ListNode(sum % 10);
-            int carryOver = (sum - curNode.val) / 10;
-            l1 = l1.next;
-            l2 = l2.next;
+            var sum = CalculateSum(l1, l2, 0);
+            var resultNode = curNode = CreateNextNode(sum);
+            int carryOver = CalculateCarryOver(curNode, sum);
+            MoveToNextNode(ref l1, ref l2);
             while ((l1 != null || l2 != null) || carryOver != 0)
             {
-                sum = carryOver;
-                if(l1 != null)
-                {
-                    sum += l1.val;
-                }
-                if(l2 != null)
-                {
-                    sum += l2.val;
-                }
+                sum = CalculateSum(l1, l2, carryOver);
 
-                curNode.next = new ListNode(sum % 10);
+                curNode.next = CreateNextNode(sum);
                 curNode = curNode.next;
-                carryOver = (sum - curNode.val) / 10;
+                carryOver = CalculateCarryOver(curNode, sum);
 
-                if (l1 != null) l1 = l1.next;
-                if (l2 != null) l2 = l2.next;
+                MoveToNextNode(ref l1, ref l2);
             }
 
             return resultNode;
         }
 
-        //private static int CalculateNextNodesNumber(ListNode l1, ListNode l2, int carryover)
-        //{
+        private static void MoveToNextNode(ref ListNode l1, ref ListNode l2)
+        {
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
 
-        //}
+        private static int CalculateCarryOver(ListNode curNode, int sum)
+        {
+            return (sum - curNode.val) / 10;
+        }
+
+        private static int CalculateSum(ListNode l1, ListNode l2, int carryOver)
+        {
+            int sum = carryOver;
+            if (l1 != null)
+            {
+                sum += l1.val;
+            }
+            if (l2 != null)
+            {
+                sum += l2.val;
+            }
+
+            return sum;
+        }
+
+        private static ListNode CreateNextNode(int sum)
+        {
+            return new ListNode(sum % 10);
+        }
     }
 
     public class ListNode
