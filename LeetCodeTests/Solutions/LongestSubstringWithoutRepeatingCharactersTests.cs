@@ -10,13 +10,13 @@ namespace Tests
     public class LongestSubsringWithoutRepeatingCharactersTests
     {
         [Test, TestCaseSource(typeof(LongestStringWithoutRepeatingCharactersInput), "TestCases")]
-        public int GetTwoNumbersThatAddToTargetTest(string s)
+        public int LongestSubstringWithoutRepeatingCharactersTest(string s)
         {
             return LongestSubstringWithoutRepeatingCharacters.LengthOfLongestSubstring(s);
         }
 
         [Test]
-        public void GetTwoNumbersThatAddToTargetNullExceptionTest()
+        public void LongestSubstringWithoutRepeatingCharactersTest()
         {
             Assert.Throws<ArgumentNullException>(() => LongestSubstringWithoutRepeatingCharacters.LengthOfLongestSubstring(null));
         }
