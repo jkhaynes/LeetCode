@@ -22,11 +22,9 @@ namespace LeetCode.Solutions
             while ((l1 != null || l2 != null) || carryOver != 0)
             {
                 sum = CalculateSum(l1, l2, carryOver);
-
                 curNode.next = CreateNextNode(sum);
                 curNode = curNode.next;
                 carryOver = CalculateCarryOver(curNode, sum);
-
                 MoveToNextNode(ref l1, ref l2);
             }
 
