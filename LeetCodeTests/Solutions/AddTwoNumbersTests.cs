@@ -9,16 +9,18 @@ namespace Tests
 {
     public class AddTwoNumbersTests
     {
+        AddTwoNumbers _addTwoNumbers = new AddTwoNumbers();
+
         [Test, TestCaseSource(typeof(AddTwoNumbersInput), "TestCases")]
         public void ReverseAndAddNumbersTest(ListNode l1, ListNode l2, ListNode expected)
         {
-            Assert.That(expected, Is.EqualTo(AddTwoNumbers.ReverseAndAddNumbers(l1, l2)).Using(new LinkedListComparer()));
+            Assert.That(expected, Is.EqualTo(_addTwoNumbers.ReverseAndAddNumbers(l1, l2)).Using(new LinkedListComparer()));
         }
 
         [Test]
         public void ReverseAndAddNumbersArgumentNullExceptionTest()
         {
-            Assert.Throws<ArgumentNullException>(() => AddTwoNumbers.ReverseAndAddNumbers(null, null));
+            Assert.Throws<ArgumentNullException>(() => _addTwoNumbers.ReverseAndAddNumbers(null, null));
         }
     }
 

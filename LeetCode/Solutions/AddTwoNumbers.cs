@@ -5,44 +5,51 @@ using System.Text;
 
 namespace LeetCode.Solutions
 {
-    public static class AddTwoNumbers
+    public class AddTwoNumbers
     {
-        public static ListNode ReverseAndAddNumbers(ListNode l1, ListNode l2)
+        ListNode _l1;
+        ListNode _l2;
+
+        public ListNode ReverseAndAddNumbers(ListNode l1, ListNode l2)
         {
             if (l1 == null || l2 == null)
             {
                 throw new ArgumentNullException();
+            } else
+            {
+                _l1 = l1;
+                _l2 = l2;
             }
 
             ListNode curNode = null;
-            var sum = CalculateSum(l1, l2, 0);
+            var sum = CalculateSum(_l1, _l2, 0);
             var resultNode = curNode = CreateNextNode(sum);
             int carryOver = CalculateCarryOver(curNode, sum);
-            MoveToNextNode(ref l1, ref l2);
-            while ((l1 != null || l2 != null) || carryOver != 0)
+            MoveToNextNode();
+            while ((_l1 != null || _l2 != null) || carryOver != 0)
             {
-                sum = CalculateSum(l1, l2, carryOver);
+                sum = CalculateSum(_l1, _l2, carryOver);
                 curNode.next = CreateNextNode(sum);
                 curNode = curNode.next;
                 carryOver = CalculateCarryOver(curNode, sum);
-                MoveToNextNode(ref l1, ref l2);
+                MoveToNextNode();
             }
 
             return resultNode;
         }
 
-        private static void MoveToNextNode(ref ListNode l1, ref ListNode l2)
+        private void MoveToNextNode()
         {
-            if (l1 != null) l1 = l1.next;
-            if (l2 != null) l2 = l2.next;
+            if (_l1 != null) _l1 = _l1.next;
+            if (_l2 != null) _l2 = _l2.next;
         }
 
-        private static int CalculateCarryOver(ListNode curNode, int sum)
+        private int CalculateCarryOver(ListNode curNode, int sum)
         {
             return (sum - curNode.val) / 10;
         }
 
-        private static int CalculateSum(ListNode l1, ListNode l2, int carryOver)
+        private int CalculateSum(ListNode l1, ListNode l2, int carryOver)
         {
             int sum = carryOver;
             if (l1 != null)
@@ -57,7 +64,7 @@ namespace LeetCode.Solutions
             return sum;
         }
 
-        private static ListNode CreateNextNode(int sum)
+        private ListNode CreateNextNode(int sum)
         {
             return new ListNode(sum % 10);
         }
